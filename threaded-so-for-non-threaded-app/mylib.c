@@ -27,11 +27,17 @@ void *_thread(void *arg) {
 }
 
 void make_thread() {
-	pthread_t tid;
-	int rc = pthread_create(&tid, NULL, _thread, NULL);
-	assert(rc == 0);
+	pthread_t tid[10];
+	int i, rc;
+	
+	for (i=0; i<10; i++) {
+		rc = pthread_create(&tid[i], NULL, _thread, NULL);
+		assert(rc == 0);
+	}
 	
 	void *rv;
-	rc = pthread_join(tid, &rv);
-	assert(rc == 0);
+	for (i=0; i<10; i++) {
+		rc = pthread_join(tid[i], &rv);
+		assert(rc == 0);
+	}
 }
