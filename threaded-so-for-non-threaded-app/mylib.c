@@ -7,21 +7,21 @@
 #include <sys/socket.h>
 #include <netdb.h>
 
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+
 void *_thread(void *arg) {
 	int i;
-	//char *buf;
 	struct addrinfo *res;
 	
 	for (i=0; i<10000; i++) {
 		if (getaddrinfo("localhost", NULL, NULL, &res) == 0) {
 			if (res) freeaddrinfo(res);
 		}
-		//buf = malloc(1024*sizeof(char));
-		//strcpy(buf, "abcdefghijklmnopqrstuvwuxyz");
-		//free(buf);
 	}
 	
+	pthread_mutex_lock(&mutex);
 	printf("Just another thread message!\n");
+	pthread_mutex_unlock(&mutex);
 	
 	return NULL;
 }
