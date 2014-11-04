@@ -5,7 +5,7 @@ int main() {
 	void *mylib_hdl;
 	void (*make_thread)();
 	
-	mylib_hdl = dlopen("./libmy.so", RTLD_NOW);
+	mylib_hdl = dlopen("./libmy.so", RTLD_NOW|RTLD_GLOBAL);
 	if (mylib_hdl == NULL) {
 		printf("dlopen: %s\n", dlerror());
 		return 1;

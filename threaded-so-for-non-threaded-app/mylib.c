@@ -11,7 +11,7 @@ void *_thread(void *arg) {
 	int i;
 	struct addrinfo *res;
 	
-	for (i=0; i<10000; i++) {
+	for (i=0; i<1; i++) {
 		if (getaddrinfo("localhost", NULL, NULL, &res) == 0) {
 			if (res) freeaddrinfo(res);
 		}
